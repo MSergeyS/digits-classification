@@ -203,19 +203,19 @@ void SVMevaluate(Mat& testResponse, float& count, float& accuracy, vector<int>& 
 
 int main()
 {
-    vector<Mat> trainCells;   // вектор изображений для обучения
-    vector<Mat> testCells;    // вектор изображений для тестирования
-    vector<int> trainLabels;  // вектор цифр для обучения
-    vector<int> testLabels;   // вектор цифр для теста
-    // загружаем вектора изображений и цифр
+    vector<Mat> trainCells;   // РІРµРєС‚РѕСЂ РёР·РѕР±СЂР°Р¶РµРЅРёР№ РґР»СЏ РѕР±СѓС‡РµРЅРёСЏ
+    vector<Mat> testCells;    // РІРµРєС‚РѕСЂ РёР·РѕР±СЂР°Р¶РµРЅРёР№ РґР»СЏ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ
+    vector<int> trainLabels;  // РІРµРєС‚РѕСЂ С†РёС„СЂ РґР»СЏ РѕР±СѓС‡РµРЅРёСЏ
+    vector<int> testLabels;   // РІРµРєС‚РѕСЂ С†РёС„СЂ РґР»СЏ С‚РµСЃС‚Р°
+    // Р·Р°РіСЂСѓР¶Р°РµРј РІРµРєС‚РѕСЂР° РёР·РѕР±СЂР°Р¶РµРЅРёР№ Рё С†РёС„СЂ
     loadTrainTestLabel(pathName, trainCells, testCells, trainLabels, testLabels);
 
-    // убираем наклон цифр в изображениях
+    // СѓР±РёСЂР°РµРј РЅР°РєР»РѕРЅ С†РёС„СЂ РІ РёР·РѕР±СЂР°Р¶РµРЅРёСЏС…
     vector<Mat> deskewedTrainCells;
     vector<Mat> deskewedTestCells;
     CreateDeskewedTrainTest(deskewedTrainCells, deskewedTestCells, trainCells, testCells);
 
-    // вычисление дескрипторов гистограмм ориентированных градиентов
+    // РІС‹С‡РёСЃР»РµРЅРёРµ РґРµСЃРєСЂРёРїС‚РѕСЂРѕРІ РіРёСЃС‚РѕРіСЂР°РјРј РѕСЂРёРµРЅС‚РёСЂРѕРІР°РЅРЅС‹С… РіСЂР°РґРёРµРЅС‚РѕРІ
     std::vector<std::vector<float> > trainHOG;
     std::vector<std::vector<float> > testHOG;
     CreateTrainTestHOG(trainHOG, testHOG, deskewedTrainCells, deskewedTestCells);
@@ -228,19 +228,19 @@ int main()
 
     ConvertVectortoMatrix(trainHOG, testHOG, trainMat, testMat);
 
-    // классификатор изображений - Support Vector Machines(SVM)
+    // РєР»Р°СЃСЃРёС„РёРєР°С‚РѕСЂ РёР·РѕР±СЂР°Р¶РµРЅРёР№ - Support Vector Machines(SVM)
     float C = 12.5, gamma = 0.5;
 
-    // обучение классификатора
+    // РѕР±СѓС‡РµРЅРёРµ РєР»Р°СЃСЃРёС„РёРєР°С‚РѕСЂР°
     Ptr<SVM> model = svmInit(C, gamma);
     svmTrain(model, trainMat, trainLabels);
     //Ptr<SVM> model = SVM::load("results/eyeGlassClassifierModel.yml");
 
-    // тестирование классификатора
+    // С‚РµСЃС‚РёСЂРѕРІР°РЅРёРµ РєР»Р°СЃСЃРёС„РёРєР°С‚РѕСЂР°
     Mat testResponse;
     svmPredict(model, testResponse, testMat);
 
-    // оцениваем точность
+    // РѕС†РµРЅРёРІР°РµРј С‚РѕС‡РЅРѕСЃС‚СЊ
     float count = 0;
     float accuracy = 0;
     getSVMParams(model);
