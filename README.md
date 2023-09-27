@@ -24,6 +24,7 @@ __Build application__ (release)
 ```cmd
 cd <path/to/your/project>
 mkdir build
+mkdir results
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build . --config Release
