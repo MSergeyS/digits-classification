@@ -1,4 +1,4 @@
-# __digits-classification__
+# __DigitsClassification__
 __Handwritten Digits Classification__ : An OpenCV
 ---
 
