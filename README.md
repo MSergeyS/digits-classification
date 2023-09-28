@@ -16,7 +16,7 @@ The image above shows that pipeline. In this code, we will use Histogram of Orie
 This example with code to demonstrated Image Classification use [Histogram of Oriented Gradients (HOG)](https://waksoft.susu.ru/2021/11/01/histogram-of-oriented-gradients/) + [Support Vector Machine (SVM)](https://waksoft.susu.ru/2021/05/27/image-recognition-and-object-detection-part1/).
 
 
-__Build application__ (release)
+## __Build application__ (release)
 - For build can be used [cmake](https://cmake.org/).
 
 - Install OpenCV](https://docs.opencv.org/4.x/df/d65/tutorial_table_of_content_introduction.html).
@@ -31,7 +31,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build . --config Release
 ```
 
-__Run application__ (release)
+## __Run application__ (release)
 ```cmd
 Release/digits-classification.exe
 ```
